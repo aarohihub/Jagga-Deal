@@ -34,7 +34,7 @@ export default function Login() {
       return toast.error("Invalid email format");
     if (!formData.password) return toast.error("Password is required");
     if (formData.password.length < 5)
-      return toast.error("Password must be at least 5 characters");
+      return toast.error(" Minimum 5 characters required.");
 
     return true;
   };
@@ -47,7 +47,7 @@ export default function Login() {
       dispatch(signInStart());
       const res = await axiosInstance.post("/login", formData);
       dispatch(signInSuccess(res.data.user));
-      toast.success("Login successfully");
+      toast.success("Login is successfull!");
       if (res.data.user) {
         return navigate("/");
       }

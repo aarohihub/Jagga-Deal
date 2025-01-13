@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from "react";// importing libraries
 import { FaGooglePlusG } from "react-icons/fa6";
 import { Users } from "lucide-react";
 import { Link } from "react-router-dom";

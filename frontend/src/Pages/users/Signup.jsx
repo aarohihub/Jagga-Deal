@@ -82,7 +82,7 @@ export default function Signup() {
                     id="fullName"
                     required
                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-yellow-400 px-2 py-3 outline-none"
-                    placeholder="Enter name"
+                    placeholder="Enter your name"
                     onChange={handelChange}
                   />
                   <svg
@@ -162,7 +162,7 @@ export default function Signup() {
                     id="password"
                     required
                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-yellow-400 px-2 py-3 outline-none"
-                    placeholder="Enter password"
+                    placeholder="Enter the password"
                     onChange={handelChange}
                   />
                   <svg

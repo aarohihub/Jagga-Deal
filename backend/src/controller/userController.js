@@ -5,13 +5,13 @@ const sendOtp = require("../utils/SendOtp");
 const generateOtpEmail = require("../utils/Emailformat");
 const sendToken = require("../utils/JwkToken");
 const bcrypt = require("bcrypt");
-// ! user register controller
+//  user register controller
 exports.registerUser = asyncHandler(async (req, res, next) => {
   const { fullName, email, password } = req.body;
 
   const existingUser = await User.findOne({ email: email });
   if (existingUser) {
-    return next(new ErrorHandler(409, "User already registered"));
+    return next(new ErrorHandler(409, "User has already been registered"));
   }
 
   const otp = Math.floor(100000 + Math.random() * 900000).toString();

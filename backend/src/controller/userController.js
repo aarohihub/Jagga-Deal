@@ -232,6 +232,6 @@ exports.showUser = async (req, res) => {
       res.status(404).json({ message: "User not found" });
     }
   } catch (error) {
-    res.status(404).json({ message: "sth went wrong" });
+    res.status(404).json({ message: "Something went wrong" });
   }
 };

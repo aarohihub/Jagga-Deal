@@ -1,4 +1,4 @@
-import { useEffect } from "react";// importing libraries
+import { useEffect } from "react";
 import { FaGooglePlusG } from "react-icons/fa6";
 import { Users } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -34,7 +34,7 @@ export default function Login() {
       return toast.error("Invalid email format");
     if (!formData.password) return toast.error("Password is required");
     if (formData.password.length < 5)
-      return toast.error(" Minimum 5 characters required.");
+      return toast.error("Password must be at least 5 characters");
 
     return true;
   };
@@ -47,7 +47,7 @@ export default function Login() {
       dispatch(signInStart());
       const res = await axiosInstance.post("/login", formData);
       dispatch(signInSuccess(res.data.user));
-      toast.success("Login is successfull!");
+      toast.success("Login successfully");
       if (res.data.user) {
         return navigate("/");
       }

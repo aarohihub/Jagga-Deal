@@ -16,6 +16,28 @@ import UpdateListiing from "./Pages/users/UpdateListing";
 import HomePage from "./Pages/Home/HomePage";
 import OfferListingPage from "./Pages/Home/partial/OfferListingPage";
 
+// importing admin listing pages
+import AdminPage from "./Pages/admin/AdminPage";
+import UpdateAdminListiing from "./Pages/admin/pages/UpdateAdminListing";
+import AdminListing from "../src/Pages/admin/pages/AdminListing";
+import AdminSingleListing from "../src/Pages/admin/pages/AdminSingleListing";
+import Approve from "../src/Pages/admin/pages/Approve";
+import EmiCalculator from "../src/Pages/admin/pages/EmiCal";
+import ShowAdminListing from "../src/Pages/admin/pages/ShowAdminListing";
+import ShowCurrentUser from "../src/Pages/admin/pages/ShowCurrentUser";
+
+// import auction listing pages
+import AuctionCard from "./AuctionComponent/AuctionCard";
+import AuctionListing from "./AuctionComponent/AuctionListing";
+import UpdateAuction from "./AuctionComponent/UpdateAuction";
+import ShowSingleAuctionListing from "./AuctionComponent/ShowSingleAuctionListing";
+import ShowAuctionTable from "./AuctionComponent/ShowAuctionTable";
+
+// Outlet for user
+import EmiUserCal from "./Pages/users/Emi_cal";
+import UserOutLet from "./outLet/userOutLet";
+import AdminOutLet from "./outLet/adminOutLet";
+import Search from "./Components/Search";
 function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center h-screen ">

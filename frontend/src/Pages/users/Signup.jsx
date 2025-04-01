@@ -21,10 +21,10 @@ export default function Signup() {
   };
 
   const validateForm = () => {
-    if (!formData.fullName.trim()) return toast.error("Full name is required.");
+    if (!formData.fullName.trim()) return toast.error("Full name is required");
     if (!formData.email.trim()) return toast.error("Email is required");
     if (!/\S+@\S+\.\S+/.test(formData.email))
-      return toast.error("Invalid email format.Please enter a valid email");  
+      return toast.error("Invalid email format");
     if (!formData.password) return toast.error("Password is required");
     if (formData.password.length < 5)
       return toast.error("Password must be at least 5 characters");
@@ -82,7 +82,7 @@ export default function Signup() {
                     id="fullName"
                     required
                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-yellow-400 px-2 py-3 outline-none"
-                    placeholder="Enter your name"
+                    placeholder="Enter name"
                     onChange={handelChange}
                   />
                   <svg
@@ -162,7 +162,7 @@ export default function Signup() {
                     id="password"
                     required
                     className="w-full bg-transparent text-sm border-b border-gray-300 focus:border-yellow-400 px-2 py-3 outline-none"
-                    placeholder="Enter the password"
+                    placeholder="Enter password"
                     onChange={handelChange}
                   />
                   <svg

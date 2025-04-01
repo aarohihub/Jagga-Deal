@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // importing libraries
+import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../../../libs/axios";
 import ListingItem from "../../../Components/card";
 import { Link } from "react-router-dom";

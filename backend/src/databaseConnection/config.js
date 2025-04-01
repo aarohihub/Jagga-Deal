@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");// impot of mongoose
+const mongoose = require("mongoose");
 (async () => {
   try {
     await mongoose.connect(process.env.DB_URL);

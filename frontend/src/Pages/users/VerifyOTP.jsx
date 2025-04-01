@@ -3,38 +3,35 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { FaEyeSlash } from "react-icons/fa";
 import { IoMdEye } from "react-icons/io";
+
 import { axiosInstance } from "../../libs/axios";
-
 export default function VerifyOTP() {
-  const [otp, setOtp] = useState("");  // State to store OTP
-  const [errorMessage, setErrorMessage] = useState("");  // State for error messages
-  const navigate = useNavigate();  // Navigation hook to redirect after success
-  const [showPassword, setShowPassword] = useState(false);  // Toggle password visibility
+  const [otp, setOtp] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
-  // Function to toggle OTP visibility
   const togglePassword = () => {
     setShowPassword((prevState) => !prevState);
   };
 
-  // Handles form submission for OTP verification
   const handelForm = async (e) => {
-    e.preventDefault();  // Prevent default form behavior
+    e.preventDefault();
     try {
-      const res = await axiosInstance.post("/verify/otp", { otp });  // Send OTP to server for verification
+      const res = await axiosInstance.post("/verify/otp", { otp });
 
-      if (!res) {  // Error if no response
+      if (!res) {
         toast.error("Otp not sent");
       }
-      if ((res.data.success = true)) {  // Check if OTP is verified
-        return navigate("/");  // Navigate to home on success
+      if ((res.data.success = true)) {
+        return navigate("/");
       }
-      toast.success("Successfully verified");
-    } catch (error) {  // Handle any error that occurs
+      toast.success("sucessfully verified");
+    } catch (error) {
       console.log("something went wrong", error);
       toast.error("Something went wrong");
     }
   };
-
   return (
     <div className="flex items-center justify-center min-h-screen ">
       <div className="w-full max-w-sm  border  shadow-lg rounded-md p-6">
@@ -51,16 +48,16 @@ export default function VerifyOTP() {
             </label>
             <input
               id="otpInput"
-              type={showPassword ? "number" : "password"}  // Toggle between password and number input
+              type={showPassword ? "number" : "password"}
               value={otp}
-              onChange={(e) => setOtp(e.target.value)}  // Update OTP state on input change
+              onChange={(e) => setOtp(e.target.value)}
               className="w-full px-3 py-2 border   rounded-md focus:outline-none focus:ring "
             />
             <div
               className="absolute inset-y-0 right-3 flex items-center cursor-pointer mt-5"
-              onClick={togglePassword}  // Toggle the visibility of OTP
+              onClick={togglePassword}
             >
-              {showPassword ? <IoMdEye /> : <FaEyeSlash />}  // Change icon based on visibility state
+              {showPassword ? <IoMdEye /> : <FaEyeSlash />}
             </div>
           </div>
           {errorMessage && (

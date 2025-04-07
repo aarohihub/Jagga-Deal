@@ -88,6 +88,6 @@ exports.getListing = async (req, res) => {
   } catch (error) {
     return res
       .status(405)
-      .json({ message: "some thing went wrong with the server", error });
+      .json({ message: "Some thing went wrong with the server", error });
   }
 };

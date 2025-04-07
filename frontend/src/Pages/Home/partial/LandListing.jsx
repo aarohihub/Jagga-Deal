@@ -26,13 +26,13 @@ function LandListingPage() {
         <div>
           <div className="my-3">
             <h2 className="text-2xl font-serif text-[#8F2B51] ">
-              Recent Places for Sale
+              Recent Places for Land Sale
             </h2>
             <Link
               className="text-sm text-[#8F2B51] font-serif hover-underline-animation"
               to={"/search?offer=true"}
             >
-              Show more Places for Sale
+              Show more Places for Land Sale
             </Link>
           </div>
 

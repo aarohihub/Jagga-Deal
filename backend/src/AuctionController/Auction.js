@@ -1,47 +1,3 @@
-// const Auction = require("../model/AuctionListingSchema");
-// const UserModel = require("../model/UserSchema");
-// const createAuction = async (req, res) => {
-//   try {
-//     const {
-//       title,
-//       description,
-//       address,
-//       bathrooms,
-//       bedrooms,
-//       furnished,
-//       parking,
-//       imageUrl,
-//       userRef,
-//       MinimumPrice,
-//       endTime,
-//     } = req.body;
-
-//     if (new Date(endTime) <= new Date()) {
-//       return res
-//         .status(400)
-//         .json({ message: "End time must be in the future" });
-//     }
-
-//     let auction = new Auction({
-//       title,
-//       description,
-//       address,
-//       bathrooms,
-//       bedrooms,
-//       furnished,
-//       parking,
-//       imageUrl,
-//       userRef,
-//       MinimumPrice,
-//       endTime,
-//     });
-//     await auction.save();
-//     res.status(201).json({ message: "Auction created successfully", auction });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Server Error" });
-//   }
-// };
 const Auction = require("../model/AuctionListingSchema");
 const UserModel = require("../model/UserSchema");
 const nodemailer = require("nodemailer");
@@ -49,6 +5,8 @@ const { generateAuctionEmail } = require("../utils/email/newsLetter");
 require("dotenv").config();
 const autherEmail = process.env.SMPT_MAIL;
 const autherPassword = process.env.SMPT_PASSWORD;
+
+
 const createAuction = async (req, res) => {
   try {
     const {
@@ -180,7 +138,7 @@ const updateAuctionListing = async (req, res) => {
 
     return res.status(200).json(api);
   } catch (error) {
-    return res.status(405).json({ message: "sth wrong", error });
+    return res.status(405).json({ message: "Something went wrong", error });
   }
 };
 

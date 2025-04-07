@@ -16,7 +16,7 @@ function generateAuctionEmail(title, MinimumPrice) {
                     <h2>Auction Update: ${title}</h2>
                 </div>
                 <div class="content">
-                    <p>Hello Customer>
+                    <p>Hello Customer !</p>
                     <p>The auction <strong>${title}</strong> is ending soon!</p>
                     <p>Starting Bidding Price: <strong>$${MinimumPrice}</strong></p>
                     <p>Bid now to secure your chance to win.</p>

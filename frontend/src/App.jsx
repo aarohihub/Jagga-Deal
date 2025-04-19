@@ -38,6 +38,11 @@ import EmiUserCal from "./Pages/users/Emi_cal";
 import UserOutLet from "./outLet/userOutLet";
 import AdminOutLet from "./outLet/adminOutLet";
 import Search from "./Components/Search";
+import About from "./Pages/Home/About";
+
+//
+import ForgetPassword from "./Pages/forgetPassword";
+import Email from "./Pages/Email";
 function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center h-screen ">
@@ -79,6 +84,9 @@ function App() {
       ) : (
         <Routes>
           {/* Public routes */}
+          <Route path="/enter/email" element={<Email />} />
+          <Route path="/forget/password" element={<ForgetPassword />} />
+          <Route path="/about" element={<About />} />
           <Route path="/emiCal" element={<EmiUserCal />} />
           <Route path="/search" element={<Search />} />
           <Route path="/" element={<HomePage />} />

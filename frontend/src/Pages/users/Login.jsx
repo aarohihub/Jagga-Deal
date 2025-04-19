@@ -167,9 +167,20 @@ export default function Login() {
                   Don't have an account?
                   <Link
                     to="/signup"
-                    className="font-semibold hover:underline ml-1"
+                    className="text-primary hover:underline ml-1"
                   >
                     Signup here
+                  </Link>
+                </p>
+                <p className=" text-sm mt-2">
+                  Forget password ?
+                  <Link
+                    to="/enter/email"
+                    className="text-primary hover:underline ml-1"
+                  >
+                    {" "}
+                    {loading ? "wait..." : " Click here..."}
+                    {/* Click here... */}
                   </Link>
                 </p>
               </div>

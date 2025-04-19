@@ -2,7 +2,7 @@ import { Settings, MessageSquare, Building, User, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { RiAuctionFill } from "react-icons/ri";
 import { TiCalculator } from "react-icons/ti";
-import log1 from "/images/nav.png";
+import log1 from "/images/nav1.png";
 import { useSelector } from "react-redux";
 import { axiosInstance } from "../libs/axios";
 import toast from "react-hot-toast";

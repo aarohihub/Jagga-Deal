@@ -69,7 +69,7 @@ export default function EmiCal() {
 
   return (
     <>
-      <div className="loan-calculator mt-7 ">
+      <div className="loan-calculator mt-7 h-screen">
         <motion.div
           className="top p-10 bg-primary text-white"
           initial={{ opacity: 0, y: -50 }}

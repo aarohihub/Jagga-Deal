@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000;
 const errorHandler = require("../middleware/error");
 const serchRouter = require("../routes/searchRoutes");
 const AuctionRoutes = require("../routes/Auction.Routes");
+const ResetPasswordRouter = require("../routes/forget.routes");
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser());
@@ -25,6 +26,7 @@ app.use("/api/v1", userRouter);
 app.use("/api/v1", serchRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1", AuctionRoutes);
+app.use("/api/v1", ResetPasswordRouter);
 app.use(errorHandler);
 app.listen(port, (req, res) => {
   console.log(`Example app listening on port ${port}`);

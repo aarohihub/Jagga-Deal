@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ListingItem from "../Components/card";
 
 export default function Search() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [listing, setListing] = useState([]);
   const [listing1, setListing1] = useState([]);
@@ -19,35 +20,19 @@ export default function Search() {
   });
 
   const handelChange = (e) => {
-    if (
-      e.target.id === "all" ||
-      e.target.id === "rent" ||
-      e.target.id === "sale" ||
-      e.target.id === "land"
-    ) {
-      setSidebar({ ...sidebar, type: e.target.id });
+    const { id, value, checked } = e.target;
+    if (["all", "rent", "sale", "land"].includes(id)) {
+      setSidebar((prev) => ({ ...prev, type: id }));
     }
-
-    if (e.target.id === "searchTerm") {
-      setSidebar({ ...sidebar, serachTerm: e.target.value });
+    if (id === "searchTerm") {
+      setSidebar((prev) => ({ ...prev, serachTerm: value }));
     }
-
-    if (
-      e.target.id === "parking" ||
-      e.target.id === "furnished" ||
-      e.target.id === "offer"
-    ) {
-      setSidebar({
-        ...sidebar,
-        [e.target.id]:
-          e.target.checked || e.target.checked === "true" ? true : false,
-      });
+    if (["parking", "furnished", "offer"].includes(id)) {
+      setSidebar((prev) => ({ ...prev, [id]: checked }));
     }
-
-    if (e.target.id === "sort_order") {
-      const sort = e.target.value.split("_")[0] || "created_at";
-      const order = e.target.value.split("_")[1] || "desc";
-      setSidebar({ ...sidebar, sort, order });
+    if (id === "sort_order") {
+      const [sort, order] = value.split("_");
+      setSidebar((prev) => ({ ...prev, sort, order }));
     }
   };
 
@@ -61,37 +46,26 @@ export default function Search() {
     const sortFromUrl = urlParams.get("sort");
     const orderFromUrl = urlParams.get("order");
 
-    if (
-      searchTermFromUrl ||
-      typeFromUrl ||
-      parkingFromUrl ||
-      furnishedFromUrl ||
-      offerFromUrl ||
-      sortFromUrl ||
-      orderFromUrl
-    ) {
-      setSidebar({
-        serachTerm: searchTermFromUrl || "",
-        type: typeFromUrl || "all",
-        parking: parkingFromUrl === "true" ? true : false,
-        furnished: furnishedFromUrl === "true" ? true : false,
-        offer: offerFromUrl === "true" ? true : false,
-        sort: sortFromUrl || "created_at",
-        order: orderFromUrl || "desc",
-      });
-    }
+    setSidebar({
+      serachTerm: searchTermFromUrl || "",
+      type: typeFromUrl || "all",
+      parking: parkingFromUrl === "true",
+      furnished: furnishedFromUrl === "true",
+      offer: offerFromUrl === "true",
+      sort: sortFromUrl || "createdAt",
+      order: orderFromUrl || "desc",
+    });
+
     const fetchData = async () => {
       setLoading(true);
       setShowMore(false);
       const searchQuery = urlParams.toString();
-      let result = await fetch(
+      const result = await fetch(
         `http://localhost:8080/api/v1/searchListing?${searchQuery}`
       );
-      let data = await result.json();
-      if (data.length > 8) {
+      const data = await result.json();
+      if (data.userListing.length + data.adminListing.length > 8) {
         setShowMore(true);
-      } else {
-        setShowMore(false);
       }
       setListing(data.userListing);
       setListing1(data.adminListing);
@@ -102,16 +76,15 @@ export default function Search() {
 
   const submitForm = (e) => {
     e.preventDefault();
-    const urlPrams = new URLSearchParams();
-    urlPrams.set("searchTerm", sidebar.serachTerm);
-    urlPrams.set("type", sidebar.type);
-    urlPrams.set("parking", sidebar.parking);
-    urlPrams.set("offer", sidebar.offer);
-    urlPrams.set("furnished", sidebar.furnished);
-    urlPrams.set("sort", sidebar.sort);
-    urlPrams.set("order", sidebar.order);
-    const searchQuery = urlPrams.toString();
-    navigate(`/search?${searchQuery}`);
+    const urlParams = new URLSearchParams();
+    urlParams.set("searchTerm", sidebar.serachTerm);
+    urlParams.set("type", sidebar.type);
+    urlParams.set("parking", sidebar.parking);
+    urlParams.set("offer", sidebar.offer);
+    urlParams.set("furnished", sidebar.furnished);
+    urlParams.set("sort", sidebar.sort);
+    urlParams.set("order", sidebar.order);
+    navigate(`/search?${urlParams.toString()}`);
   };
 
   const onShowMoreClick = async () => {
@@ -132,106 +105,71 @@ export default function Search() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row  font-serif ">
-      <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
-        <form onSubmit={submitForm} className="flex flex-col gap-8">
-          <div className="flex items-center gap-2  ">
-            <label className="whitespace-nowrap ">Search Term</label>
+    <div className="flex flex-col md:flex-row font-serif min-h-screen">
+      {/* Sidebar */}
+      <div className="p-4 md:p-7 border-b-2 md:border-r-2 w-full md:w-1/3 lg:w-1/4">
+        <form onSubmit={submitForm} className="flex flex-col gap-6">
+          {/* Search Input */}
+          <div className="flex flex-col">
+            <label className="mb-1">Search Term</label>
             <input
               type="text"
               id="searchTerm"
-              placeholder="Search.."
-              className="border rounded-lg p-3 w-full"
+              placeholder="Search..."
+              className="border rounded-lg p-3"
               value={sidebar.serachTerm}
               onChange={handelChange}
             />
           </div>
 
-          <div className="flex gap-2 flex-wrap items-center">
-            <label className="">Type</label>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="all"
-                className="w-5"
-                onChange={handelChange}
-                checked={sidebar.type === "all"}
-              />
-              <span>Rent and Sale</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="rent"
-                className="w-5"
-                onChange={handelChange}
-                checked={sidebar.type === "rent"}
-              />
-              <span>Rent</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="sale"
-                className="w-5"
-                onChange={handelChange}
-                checked={sidebar.type === "sale"}
-              />
-              <span>Sale</span>
-            </div>
-
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="land"
-                className="w-5"
-                onChange={handelChange}
-                checked={sidebar.type === "land"}
-              />
-              <span>Land</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="offer"
-                className="w-5"
-                onChange={handelChange}
-                checked={sidebar.offer}
-              />
-              <span>Offer</span>
+          {/* Type Selection */}
+          <div className="flex flex-col">
+            <label className="mb-1">Type</label>
+            <div className="flex flex-wrap gap-2">
+              {["all", "rent", "sale", "land", "offer"].map((item) => (
+                <div key={item} className="flex items-center gap-1">
+                  <input
+                    type="checkbox"
+                    id={item}
+                    className="w-5 h-5"
+                    onChange={handelChange}
+                    checked={
+                      sidebar.type === item ||
+                      (item === "offer" && sidebar.offer)
+                    }
+                  />
+                  <span className="capitalize">{item}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="flex gap-2 flex-wrap items-center">
-            <label className="">Amenties</label>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="parking"
-                className="w-5"
-                onChange={handelChange}
-                checked={sidebar.parking}
-              />
-              <span>Parking</span>
-            </div>
-            <div className="flex gap-2">
-              <input
-                type="checkbox"
-                id="furnished"
-                className="w-5"
-                onChange={handelChange}
-                checked={sidebar.furnished}
-              />
-              <span>Furnished</span>
+          {/* Amenities */}
+          <div className="flex flex-col">
+            <label className="mb-1">Amenities</label>
+            <div className="flex gap-4">
+              {["parking", "furnished"].map((item) => (
+                <div key={item} className="flex items-center gap-1">
+                  <input
+                    type="checkbox"
+                    id={item}
+                    className="w-5 h-5"
+                    onChange={handelChange}
+                    checked={sidebar[item]}
+                  />
+                  <span className="capitalize">{item}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <label className="">Sort:</label>
+          {/* Sort Dropdown */}
+          <div className="flex flex-col">
+            <label className="mb-1">Sort</label>
             <select
-              onChange={handelChange}
-              defaultValue={"created_at_desc"}
               id="sort_order"
+              onChange={handelChange}
+              defaultValue="createdAt_desc"
               className="border rounded-lg p-3"
             >
               <option value="regularPrice_desc">Price low to high</option>
@@ -241,40 +179,43 @@ export default function Search() {
             </select>
           </div>
 
-          <button className="text-white bg-primary rounded-lg p-3 hover:opacity-95 uppercase">
+          <button className="text-white bg-primary rounded-lg p-3 hover:opacity-90 uppercase">
             Search
           </button>
         </form>
       </div>
-      <div className="text-3xl p-3 text-slate-700 mt-3 h-screen">
-        <h1>Listing Results:</h1>
 
-        <div className="p-7 flex flex-wrap gap-4 overflow-y-auto ">
-          {!loading && listing?.length === 0 && <p>No Listing Found here</p>}
+      {/* Listings */}
+      <div className="flex flex-col flex-1 p-4 md:p-7 overflow-y-auto">
+        <h1 className="text-2xl md:text-3xl font-semibold mb-4 text-slate-700">
+          Listing Results
+        </h1>
+
+        <div className="flex flex-wrap gap-4">
           {loading && (
-            <p className="text-xl text-slate-700 text-center w-full">Loading</p>
+            <p className="text-xl text-slate-700 text-center w-full">
+              Loading...
+            </p>
           )}
-
+          {!loading && listing.length === 0 && listing1.length === 0 && (
+            <p className="text-lg text-center w-full">No Listings Found</p>
+          )}
           {!loading &&
-            listing &&
-            listing.map((listing) => (
-              <ListingItem key={listing._id} listing={listing} />
-            ))}
-          {!loading &&
-            listing1 &&
-            listing1.map((listing) => (
-              <ListingItem key={listing._id} listing={listing} />
+            [...listing, ...listing1].map((item) => (
+              <ListingItem key={item._id} listing={item} />
             ))}
         </div>
-
+{/* 
         {showMore && (
-          <button
-            onClick={onShowMoreClick}
-            className="text-sm text-green-700 hover:underline p-7"
-          >
-            Show more
-          </button>
-        )}
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={onShowMoreClick}
+              className="text-primary hover:underline text-sm"
+            >
+              Show More
+            </button>
+          </div>
+        )} */}
       </div>
     </div>
   );

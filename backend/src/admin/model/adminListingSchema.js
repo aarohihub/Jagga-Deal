@@ -69,6 +69,14 @@ const ListingSchema = new Schema(
     CancelledMessage: {
       type: String,
     },
+    landArea: {
+      type: Number,
+      required: false,
+    },
+    distanceFromMainRoad: {
+      type: Number,
+      required: false,
+    },
   },
   { timestamps: true }
 );

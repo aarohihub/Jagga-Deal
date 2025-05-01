@@ -1,4 +1,5 @@
-import image from "../../assets/images/logo2.png";
+import image from "../../assets/images/imp.gif";
+// import image from "../../assets/images/logo2.png";
 import BluredImg from "../../assets/images/Blurred BG.png";
 import Brand from "./partial/Brand";
 import Button from "./partial/component/Button";
@@ -8,9 +9,10 @@ import OfferListingPage from "./partial/OfferListingPage";
 import SaleListingPage from "./partial/SaleListingPage";
 import RentListingPage from "./partial/RentListingPage";
 import LandListingPage from "./partial/LandListing";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function HomePage() {
+
   return (
     <div>
       <div className="flex flex-col md:flex-row items-center justify-between  md:px-40 sm:px-20 px-8 z-0">
@@ -30,7 +32,9 @@ function HomePage() {
           </div>
 
           <div className="flex justify-center md:justify-start">
-            <Button />
+            <Link to="/about">
+              <Button />
+            </Link>
           </div>
         </div>
 
@@ -40,11 +44,10 @@ function HomePage() {
               className="absolute top-0 left-0 w-full h-full bg-cover bg-center blur-sm z-0"
               style={{ backgroundImage: `url(${BluredImg})` }}
             />
-
             <img
               src={image}
               alt="Logo"
-              className="max-w-full h-auto object-contain relative "
+              className="max-w-full h-auto object-contain relative  "
             />
           </div>
         </div>

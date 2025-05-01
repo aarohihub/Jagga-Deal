@@ -33,6 +33,8 @@ export default function CreateListiing() {
     offer: false,
     parking: false,
     furnished: false,
+    landArea: "",
+    distanceFromMainRoad: "",
   });
 
   const imageUpload = (e) => {
@@ -161,7 +163,7 @@ export default function CreateListiing() {
     }
   };
   return (
-    <div className="flex">
+    <div className="flex text-primary">
       <div className="h-full">
         <Sidebar />
       </div>
@@ -225,6 +227,30 @@ export default function CreateListiing() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.2 }}
               value={formData.address}
+              onChange={submit}
+              required
+            />
+            <motion.input
+              className="appearance-none block    border  rounded-md py-2 px-4 leading-tight focus:outline-none "
+              type="number"
+              id="landArea"
+              placeholder="Land Area in Aana"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+              value={formData.landArea}
+              onChange={submit}
+              required
+            />
+            <motion.input
+              className="appearance-none block    border  rounded-md py-2 px-4 leading-tight focus:outline-none "
+              type="number"
+              id="distanceFromMainRoad"
+              placeholder="Distance From Main Road in Meter"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+              value={formData.distanceFromMainRoad}
               onChange={submit}
               required
             />

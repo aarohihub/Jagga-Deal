@@ -10,11 +10,13 @@ import {
   FaChair,
   FaMapMarkerAlt,
   FaParking,
+  FaRoad,
   FaShare,
 } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { axiosInstance } from "../../libs/axios";
 import { toast } from "react-hot-toast";
+import { MdOutlineCropLandscape } from "react-icons/md";
 
 export default function ShowCreatedListing() {
   const params = useParams();
@@ -54,28 +56,28 @@ export default function ShowCreatedListing() {
     }
   };
 
-  //   const createUser = async (userRef) => {
-  //     try {
-  //       const userData = {
-  //         senderId: currentUser._id,
-  //         receiverId: userRef,
-  //       };
-  //       let result = await fetch("/api/chat", {
-  //         method: "Post",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify(userData),
-  //       });
+  const createUser = async (userRef) => {
+    try {
+      const userData = {
+        senderId: currentUser._id,
+        receiverId: userRef,
+      };
+      let result = await fetch("http://localhost:8080/api/v1/chat", {
+        method: "Post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
 
-  //       result = await result.json();
-  //       if (result) {
-  //         navigate("/chat");
-  //       }
-  //     } catch (error) {
-  //       console.log("sth went wrong", error);
-  //     }
-  //   };
+      result = await result.json();
+      if (result) {
+        navigate("/chat");
+      }
+    } catch (error) {
+      console.log("sth went wrong", error);
+    }
+  };
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen z-10">
       {loading && <p className="text-center my-9 text-3xl">Loading...</p>}
       {error && (
         <p className="text-center my-9 text-3xl">some thing went wrong</p>
@@ -83,7 +85,7 @@ export default function ShowCreatedListing() {
 
       {listing && (
         <div>
-          <Swiper navigation>
+          <Swiper navigation className="z-10">
             {listing.imageUrl.map((url) => (
               <SwiperSlide key={url}>
                 <div
@@ -154,13 +156,11 @@ export default function ShowCreatedListing() {
               )}
             </div>
             <p className="text-secondary">
-              <span className="font-semibold text-secondary">
-                Description -{" "}
-              </span>
+              <span className="font-sans text-secondary">Description - </span>
               {listing.description}
             </p>
             {listing.type === "rent" || listing.type === "sale" ? (
-              <ul className="text-secondary font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
+              <ul className="text-secondary font-sans text-sm flex flex-wrap items-center gap-4 sm:gap-6">
                 <li className="flex items-center gap-1 whitespace-nowrap ">
                   <FaBed className="text-lg" />
                   {listing.bedrooms > 1
@@ -180,6 +180,16 @@ export default function ShowCreatedListing() {
                 <li className="flex items-center gap-1 whitespace-nowrap ">
                   <FaChair className="text-lg" />
                   {listing.furnished ? "Furnished" : "Unfurnished"}
+                </li>
+                <li className="flex items-center gap-1 whitespace-nowrap ">
+                  <MdOutlineCropLandscape className="text-lg" />
+                  {listing?.landArea ? `${listing.landArea} Aana` : ""}
+                </li>
+                <li className="flex items-center gap-1 whitespace-nowrap ">
+                  <FaRoad className="text-lg" />
+                  {listing?.distanceFromMainRoad
+                    ? `${listing.distanceFromMainRoad} Meter`
+                    : ""}
                 </li>
               </ul>
             ) : (
@@ -297,6 +307,16 @@ export default function ShowCreatedListing() {
                 <li className="flex items-center gap-1 whitespace-nowrap ">
                   <FaChair className="text-lg" />
                   {listing1.furnished ? "Furnished" : "Unfurnished"}
+                </li>
+                <li className="flex items-center gap-1 whitespace-nowrap ">
+                  <MdOutlineCropLandscape className="text-lg" />
+                  {listing?.landArea ? `${listing.landArea} Aana` : ""}
+                </li>
+                <li className="flex items-center gap-1 whitespace-nowrap ">
+                  <FaRoad className="text-lg" />
+                  {listing?.distanceFromMainRoad
+                    ? `${listing.distanceFromMainRoad} Meter`
+                    : ""}
                 </li>
               </ul>
             ) : (

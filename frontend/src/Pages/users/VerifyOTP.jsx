@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { FaEyeSlash } from "react-icons/fa";
 import { IoMdEye } from "react-icons/io";
@@ -33,7 +33,7 @@ export default function VerifyOTP() {
     }
   };
   return (
-    <div className="flex items-center justify-center min-h-screen ">
+    <div className="flex items-center justify-center min-h-screen text-primary ">
       <div className="w-full max-w-sm  border  shadow-lg rounded-md p-6">
         <h2 className="text-2xl font-semibold  mb-4 text-center select-none">
           Verify OTP
@@ -66,12 +66,12 @@ export default function VerifyOTP() {
             </p>
           )}
           <div className="flex flex-col gap-3">
-            <button type="submit" className="btn glass w-full">
+            <button type="submit" className="btn glass w-full text-secondary">
               Verify
             </button>
-            {/* <button type="submit" className="btn glass w-full">
+            <Link to="/resend-otp" className="btn glass w-full text-yellow-800">
               Resend OTP
-            </button> */}
+            </Link>
           </div>
         </form>
       </div>

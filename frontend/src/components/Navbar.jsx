@@ -2,7 +2,7 @@ import { Settings, MessageSquare, Building, User, LogOut } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { RiAuctionFill } from "react-icons/ri";
 import { TiCalculator } from "react-icons/ti";
-import log1 from "/images/nav.png";
+import log1 from "/images/nav1.png";
 import { useSelector } from "react-redux";
 import { axiosInstance } from "../libs/axios";
 import toast from "react-hot-toast";
@@ -51,7 +51,7 @@ export default function Navbar() {
   };
   return (
     <>
-      <div className="navbar md:px-40 sm:px-20 px-8 z-50">
+      <div className="navbar md:px-40 sm:px-20 px-8 z-50 text-primary">
         <div className="flex-1  ">
           <p className="btn btn-ghost text-4xl scale-110">
             <Link to="/">
@@ -79,7 +79,7 @@ export default function Navbar() {
             </div>
           </form>
           <Link onClick={handelSubmit}>
-            <li className="hiddem sm:inline text-slate-600 hover-underline-animation">
+            <li className="hiddem sm:inline  hover-underline-animation">
               <p className="flex items-center">
                 <FaRegBuilding />
                 <p> Property</p>
@@ -87,7 +87,7 @@ export default function Navbar() {
             </li>
           </Link>
           <Link to="/auctionDetails">
-            <li className="hiddem sm:inline text-slate-600 hover-underline-animation">
+            <li className="hiddem sm:inline  hover-underline-animation">
               <p className="flex items-center">
                 <RiAuctionFill />
                 <p> Auction</p>
@@ -95,14 +95,14 @@ export default function Navbar() {
             </li>
           </Link>
           <Link to="/emiCal">
-            <li className="hiddem sm:inline text-slate-600 hover-underline-animation">
+            <li className="hiddem sm:inline  hover-underline-animation">
               <p className="flex items-center">
                 <TiCalculator />
                 <p> Emi calculator</p>
               </p>
             </li>
           </Link>
-          <div className="  hidden sm:block ">
+          <div className="  hidden sm:block text-primary ">
             <div className="flex gap-6">
               {/* <Link
                 to={"/settings"}
@@ -114,8 +114,21 @@ export default function Navbar() {
                 <Settings className="w-4 h-4 animate-spin" />
                 <span className="hidden sm:inline "></span>
               </Link> */}
+
               {role === "user" || role === "admin" ? (
-                <></>
+                <>
+                  {" "}
+                  <Link
+                    to={"/chat"}
+                    className={`
+            btn btn-sm gap-2 transition-colors 
+            
+            `}
+                  >
+                    <MessageSquare className="w-4 h-4 text-primary " />
+                    <span className="hidden sm:inline "></span>
+                  </Link>
+                </>
               ) : (
                 <>
                   {" "}
@@ -125,27 +138,17 @@ export default function Navbar() {
             btn btn-sm gap-2 transition-colors 
             `}
                   >
-                    <User className="w-4 h-4 " size={20} strokeWidth={1.75} />
+                    <User
+                      className="w-4 h-4 text-primary "
+                      size={20}
+                      strokeWidth={1.75}
+                    />
 
                     <span className="hidden sm:inline "></span>
                   </Link>
                 </>
               )}
-              {role === "user" && (
-                <>
-                  {" "}
-                  <Link
-                    to={"/message"}
-                    className={`
-            btn btn-sm gap-2 transition-colors 
-            
-            `}
-                  >
-                    <MessageSquare className="w-4 h-4 " />
-                    <span className="hidden sm:inline "></span>
-                  </Link>
-                </>
-              )}
+              {role === "user" && <> </>}
             </div>
           </div>
 
@@ -157,8 +160,8 @@ export default function Navbar() {
             
             `}
             >
-              <Building className="w-4 h-4 " />
-              <span className="hidden sm:inline ">Admin</span>
+              <Building className="w-4 h-4 text-primary" />
+              <span className="hidden sm:inline  text-primary">Admin</span>
             </Link>
           )}
 

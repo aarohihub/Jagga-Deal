@@ -18,6 +18,8 @@ export default function AuctionListiing() {
   const [error, setError] = useState(false);
   const [loding, setLoding] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
+
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({

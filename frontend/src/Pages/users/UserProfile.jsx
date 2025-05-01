@@ -131,7 +131,7 @@ const UserProfile = () => {
             />
             <img
               onClick={() => fileRef.current.click()}
-              src={formData.avatar || currentUser.avatar}
+              src={formData?.avatar || currentUser?.avatar}
               alt="Profile"
               className="rounded-full w-48 h-48 mx-auto mb-4 border-4 border-indigo-800 dark:border-blue-900 transition-transform duration-300 hover:scale-105 select-none"
             />

@@ -12,6 +12,7 @@ import {
   signInSuccess,
   signInFailure,
 } from "../../redux/user/userSlice";
+import image from "../../../public/login/image.png";
 import OAuth from "../../Components/Oauth/OAuth";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -58,11 +59,12 @@ export default function Login() {
   };
   return (
     <>
-      <div className="font-[sans-serif]  h-full ">
+      <div className="font-normal  h-full text-primary">
         <div className="grid md:grid-cols-2 items-center gap-8 h-full">
           <div className="max-md:order-1 p-4 select-none ">
             <img
-              src="https://readymadeui.com/signin-image.webp"
+              // src="https://readymadeui.com/signin-image.webp"
+              src={image}
               className="lg:max-w-[85%] w-full h-full object-contain block mx-auto"
               alt="login-image"
             />
@@ -150,10 +152,10 @@ export default function Login() {
                 </div>
               </div>
 
-              <div className="mt-12 w-full">
+              <div className="mt-12 w-full text-primary">
                 <div className=" flex flex-col gap-4">
                   <button
-                    className="btn glass"
+                    className="btn glass text-primary"
                     onClick={submitForm}
                     disabled={loading}
                   >
@@ -167,9 +169,20 @@ export default function Login() {
                   Don't have an account?
                   <Link
                     to="/signup"
-                    className="font-semibold hover:underline ml-1"
+                    className="text-primary hover:underline ml-1"
                   >
                     Signup here
+                  </Link>
+                </p>
+                <p className=" text-sm mt-2">
+                  Forget password ?
+                  <Link
+                    to="/enter/email"
+                    className="text-primary hover:underline ml-1"
+                  >
+                    {" "}
+                    {loading ? "wait..." : " Click here..."}
+                    {/* Click here... */}
                   </Link>
                 </p>
               </div>

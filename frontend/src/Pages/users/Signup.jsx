@@ -5,6 +5,7 @@ import { useState } from "react";
 import { axiosInstance } from "../../libs/axios";
 import { toast } from "react-hot-toast";
 import OAuth from "../../Components/Oauth/OAuth";
+import image from "../../../public/login/image.png";
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -55,11 +56,12 @@ export default function Signup() {
 
   return (
     <>
-      <div className="font-[sans-serif] h-full">
+      <div className="font-[sans-serif] h-full text-primary">
         <div className="grid md:grid-cols-2 items-center gap-8 h-full">
           <div className="max-md:order-1 p-4 select-none">
             <img
-              src="https://readymadeui.com/signin-image.webp"
+              // src="https://readymadeui.com/signin-image.webp"
+              src={image}
               className="lg:max-w-[85%] w-full h-full object-contain block mx-auto"
               alt="login-image"
             />
@@ -153,7 +155,7 @@ export default function Signup() {
                 </div>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-8 text-primary">
                 <label className=" text-xs block mb-2">Password</label>
                 <div className="relative flex items-center">
                   <input
@@ -181,14 +183,18 @@ export default function Signup() {
                 </div>
               </div>
 
-              <div className="mt-12 w-full">
-                <div className="flex flex-col gap-4">
+              <div className="mt-12 w-full text-primary">
+                <div className="flex flex-col gap-4 text-primary">
                   <button
                     onClick={submitForm}
-                    className="btn glass"
+                    className="btn glass text-primary"
                     disabled={loading}
                   >
-                    <Users size={20} strokeWidth={1.75} />
+                    <Users
+                      size={20}
+                      strokeWidth={1.75}
+                      className="text-primary"
+                    />
                     {loading ? "Loading..." : " Register"}
                   </button>
                   <OAuth />

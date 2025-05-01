@@ -34,6 +34,8 @@ export default function UpdateAdminListiing() {
     offer: false,
     parking: false,
     furnished: false,
+    landArea: "",
+    distanceFromMainRoad: "",
   });
 
   const imageUpload = (e) => {
@@ -173,7 +175,7 @@ export default function UpdateAdminListiing() {
 
   return (
     <motion.main
-      className="p-3 max-w-4xl mx-auto h-screen overflow-y-auto"
+      className="p-3 max-w-4xl mx-auto h-screen overflow-y-auto text-primary"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -232,6 +234,30 @@ export default function UpdateAdminListiing() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.2 }}
             value={formData.address}
+            onChange={submit}
+            required
+          />
+          <motion.input
+            className="appearance-none block    border  rounded-md py-2 px-4 leading-tight focus:outline-none "
+            type="number"
+            id="landArea"
+            placeholder="Land Area in Aana"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            value={formData.landArea}
+            onChange={submit}
+            required
+          />
+          <motion.input
+            className="appearance-none block    border  rounded-md py-2 px-4 leading-tight focus:outline-none "
+            type="number"
+            id="distanceFromMainRoad"
+            placeholder="Distance From Main Road in Meter"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            value={formData.distanceFromMainRoad}
             onChange={submit}
             required
           />
@@ -443,7 +469,7 @@ export default function UpdateAdminListiing() {
             ))}
           <button
             disabled={loding || uploading}
-            className="p-3 bg-slate-700 text-white rounded-lg my-3 disabled:opacity-65 "
+            className="p-3 bg-primary text-white rounded-lg my-3 disabled:opacity-65 "
           >
             {loding ? "Updating..." : "Update Listing"}
           </button>

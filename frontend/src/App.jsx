@@ -38,6 +38,13 @@ import EmiUserCal from "./Pages/users/Emi_cal";
 import UserOutLet from "./outLet/userOutLet";
 import AdminOutLet from "./outLet/adminOutLet";
 import Search from "./Components/Search";
+import About from "./Pages/Home/About";
+
+//
+import ForgetPassword from "./Pages/forgetPassword";
+import Email from "./Pages/Email";
+import Chat from "./ChatPage/Chat";
+import ResendOtp from "./Pages/users/ResendOtp";
 function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center h-screen ">
@@ -79,6 +86,10 @@ function App() {
       ) : (
         <Routes>
           {/* Public routes */}
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/enter/email" element={<Email />} />
+          <Route path="/forget/password" element={<ForgetPassword />} />
+          <Route path="/about" element={<About />} />
           <Route path="/emiCal" element={<EmiUserCal />} />
           <Route path="/search" element={<Search />} />
           <Route path="/" element={<HomePage />} />
@@ -86,6 +97,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/verifyOtp" element={<VerifyOTP />} />
           <Route path="/listing/:id" element={<ShowCreatedListing />} />
+          <Route path="/resend-otp" element={<ResendOtp />} />
           <Route element={<UserOutLet />}>
             <Route path="/user/profile" element={<UserProfile />} />
             <Route path="/offerlisting" element={<OfferListingPage />} />

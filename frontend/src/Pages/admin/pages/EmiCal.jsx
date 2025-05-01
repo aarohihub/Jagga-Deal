@@ -13,8 +13,6 @@ export default function EmiCal() {
   const [totalAmount, setTotalAmount] = useState(0);
   const [myChart, setMyChart] = useState(null);
 
-
-
   useEffect(() => {
     if (myChart) {
       updateChart();
